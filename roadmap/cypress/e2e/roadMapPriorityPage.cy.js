@@ -5,7 +5,7 @@ describe('Road map priorities', () => {
             cy.get('#request_input').type('Hello World.')
             cy.get('#request_button').click()
 
-            cy.get('#request_input').to.have.string('')
+            cy.get('#request_input').should('contain', '')
         })
     })
 })
