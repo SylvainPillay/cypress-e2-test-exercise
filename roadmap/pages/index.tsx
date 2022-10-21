@@ -82,7 +82,7 @@ function Item({
   return (
     <div
       className={clsx(
-        'p-6 mx-8 flex items-center border-t border-l border-r',
+        'p-6 mx-8 flex items-center border-t border-l border-r record-item',
         isFirst && 'rounded-t-md',
         isLast && 'border-b rounded-b-md'
       )}
@@ -99,7 +99,7 @@ function Item({
         {isReleased ? '✅' : '👍'}
       </button>
       <h3 className="text font-semibold w-full text-left">{feature.title}</h3>
-      <div className="bg-gray-200 text-gray-700 text-sm rounded-xl px-2 ml-2">
+      <div id="feature_score" className="bg-gray-200 text-gray-700 text-sm rounded-xl px-2 ml-2">
         {feature.score}
       </div>
     </div>
@@ -202,7 +202,7 @@ export default function Roadmap({
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl my-8 sm:w-full bg-white rounded-md shadow-xl h-full border border-gray-100">
           <div className="mx-8 w-full">
-            <form className="relative my-8" onSubmit={addFeature}>
+            <form id="record_form" className="relative my-8" onSubmit={addFeature}>
               <input
                 id="request_input"
                 ref={featureInputRef}
