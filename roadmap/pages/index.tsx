@@ -88,6 +88,7 @@ function Item({
       )}
     >
       <button
+       id="vote_button"
         className={clsx(
           'ring-1 ring-gray-200 rounded-full w-8 min-w-[2rem] h-8 mr-4 focus:outline-none focus:ring focus:ring-blue-300',
           (isReleased || hasVoted) &&
@@ -242,6 +243,7 @@ export default function Roadmap({
             </p>
             <form className="relative my-4" onSubmit={subscribe}>
               <input
+                id="email"
                 ref={subscribeInputRef}
                 aria-label="Email for updates"
                 placeholder="Email Address"
@@ -252,6 +254,7 @@ export default function Roadmap({
                 className="px-3 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
               />
               <button
+                id ="email_submit"
                 className="flex items-center justify-center absolute right-2 top-2 px-4 h-10 border border-gray-200 text-gray-900 rounded-md w-14 focus:outline-none focus:ring focus:ring-blue-300 focus:bg-gray-100"
                 type="submit"
               >

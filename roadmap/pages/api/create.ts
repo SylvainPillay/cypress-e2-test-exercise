@@ -8,7 +8,6 @@ export default async function create(
   res: NextApiResponse
 ) {
   const { title } = req.body
-  console.log(req.body)
   if (!title) {
     res.status(400).json({
       error: 'Feature can not be empty',
