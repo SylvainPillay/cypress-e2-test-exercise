@@ -223,7 +223,7 @@ export default function Roadmap({
               </button>
             </form>
           </div>
-          <div className="w-full">
+          <div id="vote_items" className="w-full">
             {data.features.map((feature: Feature, index: number) => (
               <Item
                 key={index}
