@@ -12,6 +12,7 @@ type Feature = {
   title: string
   score: number
   ip: string
+  released: boolean
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
@@ -95,6 +96,7 @@ function Item({
             'bg-green-100 cursor-not-allowed ring-green-300'
         )}
         disabled={isReleased || hasVoted}
+        data-released={isReleased}
         onClick={upvote}
       >
         {isReleased ? '✅' : '👍'}
@@ -229,7 +231,7 @@ export default function Roadmap({
                 key={index}
                 isFirst={index === 0}
                 isLast={index === data.features.length - 1}
-                isReleased={false}
+                isReleased={feature.released}
                 hasVoted={feature.ip === ip}
                 feature={feature}
               />

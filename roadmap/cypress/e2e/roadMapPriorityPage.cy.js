@@ -32,8 +32,7 @@ describe("Road map priorities", () => {
         );
         getRequestButton().click();
 
-        cy.get(".w-full")
-          .find(".record-item .bg-green-100")
+        cy.get("[data-released=\"false\"]")
           .should("have.length", 1);
       });
     });
@@ -132,7 +131,7 @@ describe("Road map priorities", () => {
     });
 
     it("vote count should increase by one if vote already exists", () => {
-      addRequest('a cool request 3')
+      addFeature('a cool request 3')
         .then(() => {
           visitHomePage().then(() => {
             getVoteButton().click();
@@ -148,9 +147,9 @@ describe("Road map priorities", () => {
 
 
     it("features should have been re-ordered", () => {
-      addRequest('Ireland to win by 5')
-        .then(() => addRequest('Springboks to draw with Ireland'))
-        .then(() => addRequest('Springboks to win by 5'))
+      addFeature('Ireland to win by 5')
+        .then(() => addFeature('Springboks to draw with Ireland'))
+        .then(() => addFeature('Springboks to win by 5'))
         .then(() => visitHomePage())
         .then(() => {
           assertFeatureTextShouldContain("Ireland to win by 5", 0);
@@ -178,6 +177,24 @@ describe("Road map priorities", () => {
               })
           });
         });
+
+    });
+
+    it("feature should display tick when released", () => {
+      addFeature('add release flag capability').then(() => {
+        visitHomePage().then(() => {
+          cy.get("[data-released=\"false\"]")
+            .should("have.length", 1);
+        })
+        getAllFeatures().then((features) => {
+          releaseFeature(features[0].id).then(() => {
+            visitHomePage().then(() => {
+              cy.get("[data-released=\"true\"]")
+                .should("have.length", 1);
+            })
+          })
+        });
+      });
 
     });
 
@@ -245,7 +262,17 @@ describe("Road map priorities", () => {
       });
     }
 
-    const addRequest = (title) => {
+    const releaseFeature = async (id) => {
+      return cy.request({
+        method: "POST",
+        url: "http://localhost:3000/api/release",
+        body: {
+          id,
+        },
+      });
+    }
+
+    const addFeature = (title) => {
       return cy.request({
         method: "POST",
         url: "http://localhost:3000/api/create",
